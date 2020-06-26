@@ -18,25 +18,43 @@ const main = async () => {
       bootstrap: send
     }
   });
+  const handler = async (im) => {
+    console.log('immm iss', im)
+    const stream = await node.push(["bootstrap"], {}, Readable.from(im));
+    return im;
+  }
   try {
-    var camera = new cv.VideoCapture(0);
-    var window = new cv.NamedWindow('Video', 0)
+    var camera = await new cv.VideoCapture(0);
+    var window = await new cv.NamedWindow('Video', 0)
     setInterval(async () => {
-      var im = await camera.read(function (err, im) {
+      // const example = async () => {
+      var image = await camera.read( (err, im) => {
         if (err) throw err;
         console.log(im.size())
         if (im.size()[0] > 0 && im.size()[1] > 0) {
           if (err) throw err;
           window.show(im);
+          try{
+            handler(im).then(data => {
+              console.log(data);
+            }, error => {
+              // console.log('we have an error', err)
+            })
+          } catch(err){
+            console.log('fuci', err)
+          }
         }
         window.blockingWaitKey(0, 50);
       });
-      try {
-        const stream = await node.push(["node"], {}, Readable.from(im));
-      } catch (err) {
-        console.log(err);
-      }
-    }, 20);
+      return image
+    // }
+    // example().then(img => {
+    //   console.log('img iss',img);
+      
+    // }, error => {
+    //   console.log('error')
+    // })
+    }, 100);
   } catch (e) {
     console.log("Couldn't start camera:", e)
   }

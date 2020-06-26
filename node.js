@@ -17,13 +17,13 @@ const main = async () => {
 
       for await (const data of stream.body) {
         console.log(
-          `GOT ${data.byteLength} byte(s) from service ["bootstrap"].`
+          `GOT ${data} byte(s) from service ["bootstrap"].`
         );
       }
     } catch (err) {
       console.error(err.message);
     }
-  }, 1000);
+  }, 100);
 };
 
 main().catch((err) => console.error(err));
