@@ -22,7 +22,7 @@ var cv = require("opencv");
             console.log(JSON.stringify(im));
             if (im.size()[0] > 0 && im.size()[1] > 0) {
               if (err) throw err;
-              window.show(im);
+            //   window.show(im);
             }
             window.blockingWaitKey(0, 50);
           });
