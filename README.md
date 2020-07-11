@@ -50,6 +50,8 @@ You can find an in depth walkthrough for training a TensorFlow.js model [here](h
 
 ## Deploy the gateway 
 
+> Do this step frm any machine
+
 1. Login to your dockerhub
 
 ```
@@ -64,7 +66,7 @@ $ https://github.com/SaifRehman/maskd.git
 3. navigate to edge directory 
 
 ```
-$ cd maskd/edge
+$ cd maskd/gateway
 ```
 
 4. Build the dockerfile
@@ -344,3 +346,72 @@ $ export HZN_EXCHANGE_USER_AUTH=iamapikey:<api-key>
 ```
 $ hzn exchange pattern list IBM/
 ```
+
+## Deploying the edge application
+
+> Do these steps from raspberrypi 
+
+1. Pre check if these env variable exist 
+
+```
+$ echo "HZN_ORG_ID=$HZN_ORG_ID, HZN_EXCHANGE_USER_AUTH=$HZN_EXCHANGE_USER_AUTH, DOCKER_HUB_ID=$DOCKER_HUB_ID"
+$ which git jq
+$ ls ~/.hzn/keys/service.private.key ~/.hzn/keys/service.public.pem
+$ cat /etc/default/horizon
+```
+
+2. Create edge service metadata for your project
+
+```
+$ hzn dev service new -s myservice -V 1.0.0 -i $DOCKER_HUB_ID/myservice --noImageGen
+```
+3. Build your container. The container image name must match what is referenced in horizon/service.definition.json.
+
+```
+$ eval $(hzn util configconv -f horizon/hzn.json)
+$ export ARCH=$(hzn architecture)
+$ sudo docker build -t "${DOCKER_IMAGE_BASE}_$ARCH:$SERVICE_VERSION" .
+$ unset DOCKER_IMAGE_BASE SERVICE_NAME SERVICE_VERSION
+```
+4. Run this service container in the Horizon simulated agent environment
+
+```
+$ hzn dev service start -S
+```
+
+5. Verify that your service container is running:
+
+```
+$ docker ps
+```
+
+6. Stop the service
+
+```
+$ hzn dev service stop
+```
+
+7. Publish service and pattern
+
+```
+$ hzn exchange service publish -f horizon/service.definition.json
+$ hzn exchange service list
+$ hzn exchange pattern publish -f horizon/pattern.json
+$ hzn exchange pattern list
+```
+
+8. Register your edge node to run your deployment pattern
+
+```
+$ hzn register -p pattern-myservice-$(hzn architecture) -s myservice --serviceorg $HZN_ORG_ID
+```
+
+9. Unregister your edge node and stop the myservice service:
+
+```
+$ hzn unregister -f
+```
+
+## Test your application 
+
+1. Once your cluster is up navigate to FE, and see if you can get processed streams
