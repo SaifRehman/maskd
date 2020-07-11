@@ -1,0 +1,27 @@
+{
+  "name": "object-detection-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node gateway.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaifRehman/object-detection-node.git"
+  },
+  "dependencies": {
+    "flatend": "0.0.7"
+  },
+  "opencv4nodejs": {
+    "autoBuildFlags": "-DOPENCV_GENERATE_PKGCONFIG=ON -DOPENCV_PC_FILE_NAME=opencv.pc",
+    "autoBuildOpencvVersion": "4.1.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaifRehman/object-detection-node/issues"
+  },
+  "homepage": "https://github.com/SaifRehman/object-detection-node#readme"
+}

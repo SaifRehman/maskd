@@ -20,7 +20,7 @@ async function load() {
   try {
     const model = await models.load('model_web');
     console.log("model is loaded");
-    while (!done) {
+    setInterval( async () => {
       let frame = vCap.read();
       var buffer = cv.imencode('.jpg', frame)
       const results = await model.detect(buffer);
@@ -39,13 +39,13 @@ async function load() {
         vCap.reset();
         frame = vCap.read();
       }
-      var newsize = frame.resize(50, 50);
+      var newsize = frame.resize(600, 600);
       var newbuffer = cv.imencode('.jpg', newsize)
       console.log(newbuffer)
       await node.push(["node"], {}, Readable.from([newbuffer]));
       cv.waitKey(delay);
-      // cv.imshow("frame", frame)
-    }
+    }, 100);
+
 
   } catch (err) {
     console.log(err)

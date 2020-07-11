@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Face Mask Detection on IBM Edge</h1>
+    <div>
+        <img id='graph' src="1.jpg" alt="">
+    </div>
+
+</body>
+
+</html>
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+    setInterval(function () {
+        var d = new Date();
+        document.getElementById("graph").src = "1.jpg?ver=" + d.getTime();
+    }, 100);
+</script>
+
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: coral;
+    }
+
+    div {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
+    div img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+</style>
