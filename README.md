@@ -18,3 +18,21 @@ In this Repo I will walk you through on how you can build Face Mask detection de
 ## High Level Architecture 
 
 ![1](images/1.png)
+
+Tool used 
+
+1. Raspberrypy as a edge hardware
+2. IBM Edge Application Manager
+3. Nodejs
+4. Flatend
+5. Openshift
+6. Opencvjs
+7. Cloud Annotations
+
+Process workflow
+
+1. Take sample images of you wearing a mask, and without masks. Take at least 200 picture with mask, 200 picture without wearing mask
+2. Upload the picture to *** IBM Cloud Annotations *** and train 
+3. Download the trained model and save it 
+4. Deploy the edge application which takes live camera feed, and process the live camera feed through the trained model, and predict if the person is wearing mask or not. Deployment of application to raspberrypy is done by IBM Edge application manager
+5. Deploy the gateway to Openshift that will listen to frames sent by raspberrypy and showcase the frames in FE
