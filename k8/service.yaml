@@ -16,7 +16,7 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    run: gateway
+    run: edgegateway
   type: LoadBalancer
 status:
   loadBalancer: {}

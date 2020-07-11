@@ -9,13 +9,12 @@ const {
 } = require("stream");
 const vCap = new cv.VideoCapture(0);
 const delay = 50;
-let done = false;
 const blue = new cv.Vec(255, 0, 0);
 const thickness = 1;
 async function load() {
   const node = await Node.start({
     secretKey: generateSecretKey(),
-    addrs: [`:9000`]
+    addrs: ["158.177.144.174:9000"]
   });
   try {
     const model = await models.load('model_web');
@@ -39,12 +38,12 @@ async function load() {
         vCap.reset();
         frame = vCap.read();
       }
-      var newsize = frame.resize(600, 600);
+      var newsize = frame.resize(500, 500);
       var newbuffer = cv.imencode('.jpg', newsize)
       console.log(newbuffer)
       await node.push(["node"], {}, Readable.from([newbuffer]));
       cv.waitKey(delay);
-    }, 100);
+    }, 300);
 
 
   } catch (err) {

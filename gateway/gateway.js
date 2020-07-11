@@ -20,7 +20,7 @@ const send = async(ctx) => {
 const main = async () => {
   const node = await Node.start({
     secretKey: generateSecretKey(),
-    bindAddrs: [`0.0.0.0:9000`],
+    bindAddrs: [`:9000`],
     services: {
       node: send
     }
