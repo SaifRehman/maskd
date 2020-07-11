@@ -32,7 +32,7 @@ Tool used
 Process workflow
 
 1. Take sample images of you wearing a mask, and without masks. Take at least 200 picture with mask, 200 picture without wearing mask
-2. Upload the picture to *** IBM Cloud Annotations *** and train 
+2. Upload the picture to ***IBM Cloud Annotations*** and train 
 3. Download the trained model and save it 
 4. Deploy the edge application which takes live camera feed, and process the live camera feed through the trained model, and predict if the person is wearing mask or not. Deployment of application to raspberrypy is done by IBM Edge application manager
 5. Deploy the gateway to Openshift that will listen to frames sent by raspberrypy and showcase the frames in FE
