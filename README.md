@@ -2,7 +2,7 @@
   <br>
   <a href="https://github.com/SaifRehman/maskd.git"><img src="https://1.cms.s81c.com/sites/default/files/2020-04/edgeapplication600x340.jpg.jpeg" alt="ACE"></a>
   <br>
-      App Connect CI/CD using Tekton on CP4I
+      Mask Detection Demo on IBM Edge
   <br>
   <br>
 </h1>
